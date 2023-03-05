@@ -1,13 +1,12 @@
 class ArticlesController < ApplicationController
-
-    before_action :set_article, only: [:edit, :update, :destroy]
+  before_action :set_article, only: [:edit, :update, :destroy]
 
   def index
     @articles = Article.all
   end
 
   def new
-    @article = Article.new
+    @article = Article.new()
   end
 
   def create
@@ -53,9 +52,9 @@ class ArticlesController < ApplicationController
 
   def destroy
     respond_to do |format|
-        @article.destroy
-        flash[:notice] = "Article was deleted"
-        format.html { redirect_to articles_path }
+      @article.destroy
+      flash[:notice] = "Article was deleted"
+      format.html { redirect_to articles_path }
     end
   end
 

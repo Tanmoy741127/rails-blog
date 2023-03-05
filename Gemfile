@@ -52,6 +52,7 @@ gem "bootsnap", require: false
 gem 'bootstrap-sass', '~> 3.4.1'
 gem 'jquery-rails'
 gem 'sassc-rails', '>= 2.1.0'
+gem 'vite_rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

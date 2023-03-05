@@ -1,12 +1,17 @@
+# frozen_string_literal: true
+
+# app/controllers/articles_controller.rb
+# This is the controller for the articles model
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:edit, :update, :destroy]
+  before_action :set_article, only: %i[edit update destroy]
 
   def index
     @articles = Article.all
   end
 
   def new
-    @article = Article.new()
+    @article = Article.new
+    @article.wow_title
   end
 
   def create
@@ -14,8 +19,8 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     respond_to do |format|
       if @article.save
-        flash[:notice] = "Article was successfully created"
-        format.html { redirect_to @article, notice: "Article was successfully created." }
+        flash[:notice] = 'Article was successfully created'
+        format.html { redirect_to @article, notice: 'Article was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -24,12 +29,10 @@ class ArticlesController < ApplicationController
 
   def show
     # Try catch
-    begin
-      @article = Article.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      flash[:notice] = "Article not found"
-      redirect_to articles_path
-    end
+    @article = Article.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:notice] = 'Article not found'
+    redirect_to articles_path
   end
 
   def edit
@@ -41,10 +44,10 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     respond_to do |format|
       if @article.update(article_params)
-        flash[:notice] = "Article was successfully updated"
+        flash[:notice] = 'Article was successfully updated'
         format.html { redirect_to @article }
       else
-        flash[:notice] = "Article was not updated"
+        flash[:notice] = 'Article was not updated'
         format.html { render :edit, status: :unprocessable_entity }
       end
     end
@@ -53,7 +56,7 @@ class ArticlesController < ApplicationController
   def destroy
     respond_to do |format|
       @article.destroy
-      flash[:notice] = "Article was deleted"
+      flash[:notice] = 'Article was deleted'
       format.html { redirect_to articles_path }
     end
   end
